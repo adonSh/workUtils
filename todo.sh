@@ -26,7 +26,9 @@ addLine() {
 }
 
 if [[ "$1" = c || "$1" = cat || "$1" = all ]]; then
-  cat "$list" && echo
+  echo
+  cat "$list"
+  echo
 elif [[ "$1" = a || "$1" = add ]]; then
   if [[ -z "$2" ]]; then
     read line
@@ -43,5 +45,7 @@ elif [[ "$1" = r || "$1" = rm ]]; then
   sed "/$line/d" $list > $tmp
   mv "$tmp" "$list"
 else
-  head -n 3 "$list" | tail -n 1 | tail -c +3
+  echo
+  echo -e "\033[1m$(head -n 3 "$list" | tail -n 1 | tail -c +3)\033[0m"
+  echo
 fi
