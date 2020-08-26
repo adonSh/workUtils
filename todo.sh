@@ -20,12 +20,17 @@ addLine() {
     elif [[ "$urgency" =~ [nN]o? ]]; then
       addLine -e "$line"
     else
+      echo "Invalid response"
       exit 1
     fi
   fi
 }
 
-if [[ "$1" = c || "$1" = cat || "$1" = all ]]; then
+if [[ -z "$1" ]]; then
+  echo
+  echo -e "\033[1m$(head -n 3 "$list" | tail -n 1 | tail -c +3)\033[0m"
+  echo
+elif [[ "$1" = c || "$1" = cat || "$1" = all ]]; then
   echo
   cat "$list"
   echo
@@ -45,7 +50,6 @@ elif [[ "$1" = r || "$1" = rm ]]; then
   sed "/$line/d" $list > $tmp
   mv "$tmp" "$list"
 else
-  echo
-  echo -e "\033[1m$(head -n 3 "$list" | tail -n 1 | tail -c +3)\033[0m"
-  echo
+  echo "Unrecognized command"
+  exit 1
 fi
