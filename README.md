@@ -1,1 +1,1 @@
-Shell script for managing a todo list
+Scripts for managing work-related tasks

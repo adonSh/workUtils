@@ -13,8 +13,7 @@ addLine() {
   elif [[ "$urgency" = -e ]]; then
     echo "* $line" >> "$list"
   else
-    echo -n "Is it urgent? "
-    read urgency
+    read -p "Is it urgent? " urgency
     if [[ "$urgency" =~ [yY](es)? ]]; then
       addLine -u "$line"
     elif [[ "$urgency" =~ [nN]o? ]]; then
