@@ -1,7 +1,7 @@
 #!/bin/bash
 
 log="$HOME/notes/hours.md"
-today="$(date +'%A')"
+today=$(date +'%A')
 units=minutes
 units_len=$(echo " $units" | wc -c)
 
@@ -26,12 +26,12 @@ read -p "Press any key to log hours "
 end=$(date +"%s")
 hours=$(( ($end - $begin) / 60 ))
 
-if [[ "$(head -n 1 $log)" != "$today Hours" ]]; then
+if [[ "$(head -n 1 "$log")" != "$today Hours" ]]; then
   echo "$today Hours" > "$log"
   echo "=====================" >> "$log"
 fi
 
-if existing="$(grep $program $log)"; then
+if existing="$(grep "$program" "$log")"; then
   prg_len=$(echo "* $program: " | wc -c)
   prv_hrs=$(echo "$existing" | tail -c +$prg_len | head -c -$units_len)
   hours=$(( $hours + prv_hrs ))

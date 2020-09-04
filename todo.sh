@@ -37,7 +37,7 @@ elif [[ "$1" = a || "$1" = add ]]; then
   if [[ -z "$2" ]]; then
     read line
     addLine idk "$line"
-  elif [[ $( printf -- "$2" | head -c 1) != - ]]; then
+  elif [[ $(printf -- "$2" | head -c 1) != - ]]; then
     line="$2"
     addLine idk "$line"
   else
