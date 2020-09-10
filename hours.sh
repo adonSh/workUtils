@@ -2,7 +2,7 @@
 
 log="$HOME/notes/hours.md"
 today=$(date +'%A')
-units=minutes
+units=hours
 units_len=$(echo " $units" | wc -c)
 
 if [[ -z "$1" || "$1" = cat ]]; then
@@ -24,7 +24,7 @@ fi
 begin=$(date +"%s")
 read -p "Press any key to log hours "
 end=$(date +"%s")
-hours=$(( ($end - $begin) / 60 ))
+hours=$(echo "scale=1; ($end - $begin) / 3600" | bc)
 
 if [[ "$(head -n 1 "$log")" != "$today Hours" ]]; then
   echo "$today Hours" > "$log"
