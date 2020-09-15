@@ -34,7 +34,7 @@ fi
 if existing="$(grep "$program" "$log")"; then
   prg_len=$(echo "* $program: " | wc -c)
   prv_hrs=$(echo "$existing" | tail -c +$prg_len | head -c -$units_len)
-  hours=$(( $hours + prv_hrs ))
+  hours=$(echo "scale=1; $hours + $prv_hrs" | bc)
   sed -i "s/$existing/\* $program: $hours $units/" "$log"
 else
   echo "* $program: $hours $units" >> "$log"
