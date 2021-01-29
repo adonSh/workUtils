@@ -22,7 +22,7 @@ fi
 
 [[ -z "$2" ]] && read -p "Program: " program || program="$2"
 begin=$(date +"%s")
-read -p "Press any key to log hours "
+read -p "Press ENTER to log hours "
 end=$(date +"%s")
 hours=$(echo "scale=1; ($end - $begin) / 3600" | bc)
 
