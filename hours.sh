@@ -26,7 +26,7 @@ date +%H:%M
 read -p "Press ENTER to log hours "
 date +%H:%M
 end=$(date +"%s")
-hours=$(echo "scale=2; ($end - $begin) / 3600" | bc)
+hours=$(dc --expression "2 k $end $begin - 3600 / p")
 
 if [[ "$(head -n 1 "$log")" != "$today Hours" ]]; then
   echo "$today Hours" > "$log"
@@ -36,7 +36,7 @@ fi
 if existing="$(grep "$program" "$log")"; then
   prg_len=$(echo "* $program: " | wc -c)
   prv_hrs=$(echo "$existing" | tail -c +$prg_len | head -c -$units_len)
-  hours=$(echo "scale=2; $hours + $prv_hrs" | bc)
+  hours=$(dc --expression "2 k $hours $prv_hrs + p")
   sed -i "s/$existing/\* $program: $hours $units/" "$log"
 else
   echo "* $program: $hours $units" >> "$log"
