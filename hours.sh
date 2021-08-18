@@ -22,9 +22,11 @@ fi
 
 [[ -z "$2" ]] && read -p "Program: " program || program="$2"
 begin=$(date +"%s")
+date +%H:%M
 read -p "Press ENTER to log hours "
+date +%H:%M
 end=$(date +"%s")
-hours=$(echo "scale=1; ($end - $begin) / 3600" | bc)
+hours=$(echo "scale=2; ($end - $begin) / 3600" | bc)
 
 if [[ "$(head -n 1 "$log")" != "$today Hours" ]]; then
   echo "$today Hours" > "$log"
@@ -34,7 +36,7 @@ fi
 if existing="$(grep "$program" "$log")"; then
   prg_len=$(echo "* $program: " | wc -c)
   prv_hrs=$(echo "$existing" | tail -c +$prg_len | head -c -$units_len)
-  hours=$(echo "scale=1; $hours + $prv_hrs" | bc)
+  hours=$(echo "scale=2; $hours + $prv_hrs" | bc)
   sed -i "s/$existing/\* $program: $hours $units/" "$log"
 else
   echo "* $program: $hours $units" >> "$log"

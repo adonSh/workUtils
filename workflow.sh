@@ -17,4 +17,3 @@ if [[ $workflow = ? ]]; then
 else
   $workflow 2> /dev/null || echo "Unkown workflow: \"$workflow\""
 fi
-
