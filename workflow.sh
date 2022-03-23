@@ -9,7 +9,7 @@ demo()
 }
 
 ## Interface ##
-[[ -z $1 ]] && read -p "Enter workflow (? for help): " workflow || workflow=$1
+[[ -z $1 ]] && read -rp "Enter workflow (? for help): " workflow || workflow=$1
 
 if [[ $workflow = ? ]]; then
   echo Options:
